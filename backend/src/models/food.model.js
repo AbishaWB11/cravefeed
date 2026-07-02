@@ -17,7 +17,23 @@ description:{
 foodPartner:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "foodpartner"
+},
+likeCount:{
+    type: Number,
+    default: 0
+},
+savesCount:{
+    type: Number,
+    default: 0
+},
+recipe:{
+    ingredients: [{ type: String }],
+    instructions: { type: String },
+    sourceName: { type: String },
+    sourceUrl: { type: String }
 }
+},{
+    timestamps: true
 })
 
 const foodModel= mongoose.model("food", foodSchema);

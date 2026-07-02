@@ -23,6 +23,12 @@ router.get("/",
     foodController.getFoodItems)
 
 
+/* GET /api/food/mine [protected, food partner] */
+router.get("/mine",
+    authMiddleware.authFoodPartnerMiddleware,
+    foodController.getMyFoodItems)
+
+
 router.post('/like',
     authMiddleware.authUserMiddleware,
     foodController.likeFood)

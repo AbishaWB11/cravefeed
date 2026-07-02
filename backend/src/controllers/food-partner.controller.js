@@ -5,7 +5,7 @@ async function getFoodPartnerById(req, res) {
 
     const foodPartnerId = req.params.id;
 
-    const foodPartner = await foodPartnerModel.findById(foodPartnerId)
+    const foodPartner = await foodPartnerModel.findById(foodPartnerId).select('-password')
     const foodItemsByFoodPartner = await foodModel.find({ foodPartner: foodPartnerId })
 
     if (!foodPartner) {
