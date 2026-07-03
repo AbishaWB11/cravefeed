@@ -3,10 +3,14 @@ const foodPartnerModel = require("../models/foodpartner.model")
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    secure: isProduction,
+    // cross-site cookies (separate frontend/backend domains in production) require SameSite=None + Secure;
+    // Lax works locally where frontend/backend only differ by port, which counts as same-site
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000
 }
 
